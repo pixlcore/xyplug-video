@@ -1,0 +1,98 @@
+{
+	"type": "xypdf",
+	"description": "xyOps Portable Data Object",
+	"version": "1.0",
+	"xyops": "1.0.60",
+	"items": [
+		{
+			"type": "plugin",
+			"data": {
+				"id": "pmvdtlktffmpeg01",
+				"title": "Video Toolkit",
+				"enabled": true,
+				"type": "event",
+				"command": "docker run -i --rm --init --name \"xyplug-video-{{id}}\" ghcr.io/pixlcore/xyplug-video:v1.0.0",
+				"script": "",
+				"kill": "all",
+				"notes": "Render, transform, mux, and transcode video files using FFmpeg and a JSON filter specification.",
+				"icon": "video-vintage",
+				"runner": true,
+				"params": [
+					{
+						"id": "spec",
+						"title": "Video Spec JSON",
+						"type": "json",
+						"value": {
+							"inputs": [
+								{
+									"id": "video",
+									"path": "*.mp4",
+									"type": "video",
+									"select": "first"
+								},
+								{
+									"id": "music",
+									"path": "*.mp3",
+									"type": "audio",
+									"select": "first"
+								}
+							],
+							"streams": [
+								{
+									"id": "resized",
+									"from": "video:v",
+									"filters": [
+										{
+											"name": "scale",
+											"options": {
+												"w": 1280,
+												"h": 720,
+												"force_original_aspect_ratio": "decrease"
+											}
+										},
+										{
+											"name": "pad",
+											"options": {
+												"w": 1280,
+												"h": 720,
+												"x": "(ow-iw)/2",
+												"y": "(oh-ih)/2"
+											}
+										}
+									]
+								}
+							],
+							"output": {
+								"path": "final.mp4",
+								"map": {
+									"video": "resized",
+									"audio": "music:a"
+								},
+								"video": {
+									"codec": "libx264",
+									"crf": 23,
+									"preset": "medium",
+									"pix_fmt": "yuv420p"
+								},
+								"audio": {
+									"codec": "aac",
+									"bitrate": "192k"
+								},
+								"shortest": true,
+								"faststart": true
+							}
+						},
+						"caption": "The JSON spec controls inputs, filter chains, stream mapping, codecs, muxing, and output files. See the [README JSON Format](https://github.com/pixlcore/xyplug-video#json-format) for details."
+					},
+					{
+						"id": "dry_run",
+						"title": "Dry Run",
+						"type": "checkbox",
+						"value": false,
+						"caption": "Compile the JSON into FFmpeg arguments and return the planned command without rendering."
+					}
+				]
+			}
+		}
+	]
+}

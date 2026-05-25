@@ -1,0 +1,77 @@
+{
+	"xy": 1,
+	"type": "event",
+	"params": {
+		"dry_run": false,
+		"spec": {
+			"inputs": [
+				{
+					"id": "video",
+					"path": "*.mp4",
+					"type": "video"
+				},
+				{
+					"id": "music",
+					"path": "*.mp3",
+					"type": "audio"
+				}
+			],
+			"streams": [
+				{
+					"id": "processed",
+					"from": "video:v",
+					"filters": [
+						{ "name": "reverse" },
+						{
+							"name": "fade",
+							"options": {
+								"t": "in",
+								"st": 0,
+								"n": 16
+							}
+						},
+						{
+							"name": "setpts",
+							"expr": "0.5*PTS"
+						},
+						{
+							"name": "minterpolate",
+							"options": {
+								"fps": 48,
+								"mi_mode": "mci"
+							}
+						},
+						{
+							"name": "tpad",
+							"options": {
+								"stop_mode": "clone",
+								"stop_duration": 60
+							}
+						}
+					]
+				}
+			],
+			"output": {
+				"path": "final.mp4",
+				"map": {
+					"video": "processed",
+					"audio": "music:a"
+				},
+				"video": {
+					"codec": "libx264",
+					"crf": 10,
+					"preset": "slow"
+				},
+				"audio": {
+					"codec": "aac",
+					"bitrate": "192k"
+				},
+				"shortest": true,
+				"faststart": true
+			}
+		}
+	},
+	"input": {
+		"files": []
+	}
+}

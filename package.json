@@ -1,0 +1,27 @@
+{
+	"name": "xyplug-video",
+	"version": "1.0.0",
+	"private": true,
+	"description": "A xyOps marketplace plugin for rendering and transforming video with FFmpeg using JSON specs.",
+	"author": "Joseph Huckaby <jhuckaby@pixlcore.com>",
+	"homepage": "https://github.com/pixlcore/xyplug-video",
+	"license": "MIT",
+	"main": "index.js",
+	"bin": {
+		"xyplug-video": "index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pixlcore/xyplug-video"
+	},
+	"bugs": {
+		"url": "https://github.com/pixlcore/xyplug-video/issues"
+	},
+	"keywords": [
+		"xyops",
+		"video",
+		"ffmpeg",
+		"filtergraph",
+		"automation"
+	]
+}
