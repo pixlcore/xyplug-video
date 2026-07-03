@@ -11,7 +11,7 @@
 				"title": "Video Toolkit",
 				"enabled": true,
 				"type": "event",
-				"command": "docker run -i --rm --init --name \"xyplug-video-{{id}}\" ghcr.io/pixlcore/xyplug-video:v1.0.0",
+				"command": "docker run -i --rm --init --name \"xyplug-video-{{id}}\" ghcr.io/pixlcore/xyplug-video:v1.0.1",
 				"script": "",
 				"kill": "all",
 				"notes": "Render, transform, mux, and transcode video files using FFmpeg and a JSON filter specification.",

@@ -401,6 +401,29 @@ Raw mode does not resolve input globs or inject progress flags. It is intended a
 }
 ```
 
+### Extract Audio as MP3
+
+```json
+{
+	"inputs": [
+		{ "id": "input", "path": "*.mp4", "type": "video" }
+	],
+	"output": {
+		"path": "audio.mp3",
+		"map": {
+			"audio": "input:a"
+		},
+		"video": false,
+		"audio": {
+			"codec": "libmp3lame",
+			"bitrate": "192k",
+			"sampleRate": 44100,
+			"channels": 2
+		}
+	}
+}
+```
+
 ### Extract a Thumbnail
 
 ```json

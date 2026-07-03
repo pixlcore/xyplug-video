@@ -1,6 +1,6 @@
 {
 	"name": "xyplug-video",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"private": true,
 	"description": "A xyOps marketplace plugin for rendering and transforming video with FFmpeg using JSON specs.",
 	"author": "Joseph Huckaby <jhuckaby@pixlcore.com>",
